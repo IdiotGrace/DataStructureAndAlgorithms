@@ -2,6 +2,7 @@
 // derives from abstract class linearList just to make sure
 // all methods of the ADT are implemented
 // USES STL ALGORITHMS TO SIMPLIFY CODE
+// iterator class for arrayList included
 
 #ifndef arrayList_
 #define arrayList_
@@ -20,7 +21,7 @@ using namespace std;
 template<typename T>
 class arrayList : public linearList<T> 
 {
-   public:
+    public:
         // constructor, copy constructor and destructor
         arrayList(int initialCapacity = 10);
         arrayList(const arrayList<T>&);
@@ -52,6 +53,71 @@ class arrayList : public linearList<T>
             return arrayLength;
         }
 
+        // iterator for arrayList
+        class iterator 
+        {
+            public:
+                // typedefs required by C++ for a bidirectional iterator
+                typedef bidirectional_iterator_tag iterator_category;
+                typedef T value_type;
+                typedef ptrdiff_t difference_type;
+                typedef T* pointer;
+                typedef T& reference;
+
+                // constructor
+                iterator(T* thePosition = 0) 
+                {
+                    position = thePosition;
+                }
+
+                // dereferencing operators
+                T & operator*() const 
+                {
+                    return *position;
+                }
+                T* operator->() const 
+                {
+                    return &*position;
+                }
+
+                // increment
+                iterator& operator++()   // preincrement
+                {
+                    ++position; 
+                    return *this;
+                }
+                iterator operator++(int) // postincrement
+            	{   iterator old = *this;
+            	    ++position;
+            	    return old;
+            	}
+
+                // decrement
+                iterator& operator--()   // predecrement
+                {
+                    --position; 
+                    return *this;
+                }
+                iterator operator--(int) // postdecrement
+            	{
+                    iterator old = *this;
+            	    --position;
+            	    return old;
+            	}
+
+                // equality testing
+                bool operator!=(const iterator right) const
+                {
+                    return position != right.position;
+                }
+                bool operator==(const iterator right) const
+                {
+                    return position == right.position;
+                }
+            protected:
+                T* position;
+        };  // end of iterator class
+        
     protected:
         void checkIndex(int theIndex) const;
         // throw illegalIndex if theIndex invalid
@@ -62,8 +128,7 @@ class arrayList : public linearList<T>
 
 template<typename T>
 arrayList<T>::arrayList(int initialCapacity)
-{
-    // Constructor.
+{// Constructor.
     if (initialCapacity < 1)
     {
         ostringstream s;
