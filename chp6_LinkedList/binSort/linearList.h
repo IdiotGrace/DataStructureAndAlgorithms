@@ -9,7 +9,7 @@
 using namespace std;
 
 template<class T>
-class linearList
+class linearList 
 {
    public:
       virtual ~linearList() {};

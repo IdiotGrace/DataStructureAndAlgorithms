@@ -15,7 +15,7 @@
 using namespace std;
 
 class linkedDigraph;
-template <class T> class linkedWDigraph;
+template <typename T> class linkedWDigraph;
 
 template <typename T>
 class chain : public linearList<T>
@@ -89,7 +89,7 @@ chain<T>::~chain()
     }
 }
 
-template <class T>
+template <typename T>
 void chain<T>::checkIndex(int theIndex) const
 {
     // Verify that theIndex is between 0 and listSize - 1.
@@ -101,7 +101,7 @@ void chain<T>::checkIndex(int theIndex) const
     }
 }
 
-template <class T>
+template <typename T>
 T &chain<T>::get(int theIndex) const
 {   
     // Return element whose index is theIndex.

@@ -6,7 +6,7 @@ struct chainNode
 {
     //数据成员
     T element;
-    chainNode<T>* next;
+    chainNode<T> *next;
 
     //方法
     chainNode();
