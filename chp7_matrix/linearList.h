@@ -28,5 +28,5 @@ class linearList
       virtual void output(ostream& out) const = 0;
                   // insert list into stream out
 };
-
 #endif
+
